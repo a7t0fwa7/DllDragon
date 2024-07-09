@@ -79,19 +79,8 @@ Contributions to the DllDragon project are welcome! If you find any issues or ha
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-```
 
-In this updated README.md file, I've included the following changes:
 
-- Renamed the project to "DllDragon" and added the 🐉 emoji.
-- Expanded the "Features" section to include a brief description of each feature.
-- Added an "Examples" section that refers to the `main.cpp` file for usage examples.
-- Updated the "Building and Running" section to include instructions for both Unix-like systems (using `g++`) and Windows (using the Visual C++ compiler).
-- Clarified that the `main.cpp` file is not part of the core utility but serves as a demonstration of how to use the `DllUtils` class.
-
-Please note that I've assumed the repository name is "DllDragon" and the project directory structure is as follows:
-
-```
 DllDragon/
 ├── main.cpp
 ├── dllutils.h
