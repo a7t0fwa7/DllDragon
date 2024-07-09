@@ -48,13 +48,13 @@ To build and run the project, follow these steps:
 1. Clone the repository:
 
 ```
-git clone https://github.com/your-repo/Dynamic-Windows-API-Resolver.git
+git clone https://github.com/a7t0fwa7/DllDragon.git
 ```
 
 2. Navigate to the project directory:
 
 ```
-cd Dynamic-Windows-API-Resolver
+cd DllDragon
 ```
 
 3. Compile the source files:
