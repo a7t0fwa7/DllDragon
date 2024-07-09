@@ -1,32 +1,78 @@
 # Dynamic Windows API Resolver
-A simple single-include utility that makes runtime winapi resolving a breeze.
-Using `LoadLibraryA` and `GetProcAddress` manually each time you want to use an api can be cumbersome and error-prone,
-especially with the need to repeatedly cast function pointers to the correct types.
-This project aims to take away that complexity.
 
+This project provides a utility for dynamically loading functions from Windows DLLs (Dynamic Link Libraries) at runtime. It improves upon the original code from [mayossi/Dynamic-Windows-API-Resolver](https://github.com/mayossi/Dynamic-Windows-API-Resolver/blob/main/resolver.hpp) by introducing several enhancements and additional features.
 
-### Usage
-```c++
-#include <iostream>
-#include "resolver.hpp"
+## Improvements and Features
 
-int main(int argc, char* argv[]) 
-{
-    auto pMessageBoxA = WinApi("user32.dll", MessageBoxA);
-    if (!pMessageBoxA) {
-        std::cerr << "Failed to resolve api" << std::endl;
-        return -1;
-    }
+1. **Resource Management with RAII**: The `DllWrapper` class automatically unloads the DLL when it goes out of scope, ensuring proper resource cleanup and preventing resource leaks.
 
-    pMessageBoxA(NULL, "hello world", "hello world", MB_OK);
+2. **Error Logging**: Instead of throwing exceptions, the code now logs errors using a custom `Logger` class, providing better control over error handling and debugging.
+
+3. **Thread Safety**: The `DllWrapper` class is now thread-safe, with each thread having its own instance, avoiding potential race conditions and synchronization issues.
+
+4. **Caching Mechanism**: A caching mechanism has been implemented to store loaded DLL modules and resolved function addresses, improving performance by avoiding redundant module loading and function resolution.
+
+5. **Modularity and Separation of Concerns**: The dynamic library loading and function resolution logic has been separated into a dedicated `DllUtils` class, improving code organization and maintainability.
+
+6. **Improved API**: The `resolveApi` function now returns a `std::function` object instead of a raw function pointer, providing more flexibility and type safety.
+
+## Usage
+
+To use the dynamic library loading and function resolution utility, follow these steps:
+
+1. Include the necessary header files:
+
+```cpp
+#include "dllutils.h"
+```
+
+2. Load a function from a DLL:
+
+```cpp
+auto myFunction = DllUtils::loadFunction("mymodule.dll", "MyFunction");
+if (myFunction) {
+    myFunction(); // Invoke the loaded function
 }
 ```
-The following image shows the import directory of the output executable in CFF Explorer 🌶
-![import_directory_image](/assets/image.png)
 
-As you can see - `user32.dll` is not found under the `Module Name` column.
-### Disclaimer
-This repository is for research and educational purposes only, use of this code is your responsibility.  
-I take no responsibility and/or liability for how you choose to use the code available here.  
-By using, copying, or distributing any part of this repository, you understand and agree to use it at your own risk and you hold full responsibility for your actions.  
-This repository does not promote any hacking-related activity.
+The `loadFunction` method takes two arguments:
+- `moduleName`: The name of the DLL module to load (e.g., "mymodule.dll").
+- `procName`: The name of the function to retrieve from the loaded module (e.g., "MyFunction").
+
+If the function is successfully loaded, the `loadFunction` method returns a `std::function<void()>` object representing the loaded function. You can then invoke the function by calling the returned object.
+
+## Building and Running
+
+To build and run the project, follow these steps:
+
+1. Clone the repository:
+
+```
+git clone https://github.com/your-repo/Dynamic-Windows-API-Resolver.git
+```
+
+2. Navigate to the project directory:
+
+```
+cd Dynamic-Windows-API-Resolver
+```
+
+3. Compile the source files:
+
+```
+g++ -o resolver main.cpp dllutils.cpp
+```
+
+4. Run the compiled executable:
+
+```
+./resolver
+```
+
+## Contributing
+
+Contributions to this project are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
