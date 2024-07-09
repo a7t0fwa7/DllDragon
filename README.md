@@ -80,7 +80,7 @@ Contributions to the DllDragon project are welcome! If you find any issues or ha
 
 This project is licensed under the [MIT License](LICENSE).
 
-
+```txt
 DllDragon/
 ├── main.cpp
 ├── dllutils.h
@@ -88,3 +88,4 @@ DllDragon/
 ├── logger.h
 ├── logger.cpp
 └── LICENSE
+```
