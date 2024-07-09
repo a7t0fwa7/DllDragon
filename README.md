@@ -1,4 +1,4 @@
-# Dynamic Windows API Resolver
+# DllDragon 🐉
 
 This project provides a utility for dynamically loading functions from Windows DLLs (Dynamic Link Libraries) at runtime. It improves upon the original code from [mayossi/Dynamic-Windows-API-Resolver](https://github.com/mayossi/Dynamic-Windows-API-Resolver/blob/main/resolver.hpp) by introducing several enhancements and additional features.
 
